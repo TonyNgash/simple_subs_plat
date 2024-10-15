@@ -78,4 +78,12 @@ class SubscriberController extends Controller
             'data' => $subscriber->websites()->get()
         ], 200);
     }
+
+    public function all(){
+        $subscribers = Subscriber::select('id','fname','lname')->get();
+        return response()->json([
+            'status' => 'success',
+            'data' => $subscribers
+        ],201);
+    }
 }

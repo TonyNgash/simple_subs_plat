@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class WebsiteController extends Controller
 {
-    //
+    //adds a new website record in the websites table
     public function store(Request $request){
         //validate incoming request data
         $validator = Validator::make($request->all(),[
@@ -23,7 +23,7 @@ class WebsiteController extends Controller
             ], 422);
         }
 
-        //create new website
+        //add a new website record to the websites table
         $website = Website::create([
             'name' => $request->name,
             'url' => $request->url,
@@ -34,5 +34,13 @@ class WebsiteController extends Controller
             'status' => 'success',
             'data' => $website,
         ], 201);
+    }
+
+    public function all(){
+        $websites = Website::select('id','name')->get();
+        return response()->json([
+            'status' => 'success',
+            'data' => $websites
+        ],201);
     }
 }

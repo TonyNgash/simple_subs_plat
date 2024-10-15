@@ -2,9 +2,36 @@ Creating a new website
     - http://localhost:8000/api/websites
     - payload
         {
-            "name":"Blog Website",
-	        "url":"http://blog_url"
+            "name":"Cars Website",
+	        "url":"http://cars_url"
         }
+    - response
+        {
+            "status": "success",
+            "data": {
+                "name": "Cars Website",
+                "url": "http:\/\/car_url",
+                "updated_at": "2024-10-15T16:13:34.000000Z",
+                "created_at": "2024-10-15T16:13:34.000000Z",
+                "id": 4
+            }
+        }
+    
+
+Show all websites [GET]
+    - http://localhost:8000/api/websites/all
+    - response 
+        {
+            "status": "success",
+            "data": [
+                {
+                    "id": 1,
+                    "name": "Ecommerce Website"
+                }
+            ]
+        }
+
+
 Creating a new user
     - http://localhost:8000/api/subscribers
     - payload 
@@ -13,11 +40,59 @@ Creating a new user
             "fname":"Dow",
             "lname":"Johns"
         }
+    - response
+        {
+            "status": "success",
+            "data": {
+                "email": "desmodtutu@gmail.com",
+                "fname": "Desmond",
+                "lname": "Bishop",
+                "updated_at": "2024-10-15T16:16:07.000000Z",
+                "created_at": "2024-10-15T16:16:07.000000Z",
+                "id": 7
+            }
+        }
+
+
+Show all users 
+    - http://localhost:8000/api/subscribers/all
+    - response
+        {
+            "status": "success",
+            "data": [
+                {
+                    "id": 1,
+                    "fname": "Michael",
+                    "lname": "Jones"
+                }
+            ]
+        }
+
+
 Making an existing user subscribe to a website
     - http://localhost:8000/api/subscriber/1/website/1
     - where the numbers are subscriber_id and website_id respectively
-    - 
-    -
+    - payload
+        - NONE
+    - response 
+        {
+            "status": "success",
+            "data": [
+                {
+                    "id": 3,
+                    "name": "Blog Website",
+                    "url": "http:\/\/blog_url",
+                    "created_at": "2024-10-15T13:00:51.000000Z",
+                    "updated_at": "2024-10-15T13:00:51.000000Z",
+                    "pivot": {
+                        "subscriber_id": 2,
+                        "website_id": 3
+                    }
+                }
+            ]
+        }
+
+
 Creating a new post in a particular website (sends emails to all website subscribers)
     - http://localhost:8000/api/websites/2/posts
     - where the number is the website which you want to add a post to
@@ -26,5 +101,6 @@ Creating a new post in a particular website (sends emails to all website subscri
             "title":"Blog Website",
             "description":"This post is intended to be posted in the Blog website. This should also be sent as an email alert to all subscribers of this website."
         }
+    - 
 
 

@@ -12,6 +12,7 @@ use App\Mail\NewPostNotification;
 
 class PostController extends Controller
 {
+    //adds a new post to the specified website
     function store(Request $request, $website_id){
         //validate the incoming user data
         $validator = Validator::make($request->all(), [
@@ -24,7 +25,7 @@ class PostController extends Controller
                 'errors'=> $validator->errors()
             ], 422);
         }
-        //check if the website exists
+        //check if the website already exists
         $website = Website::find($website_id);
         if(!$website){
             return response()->json([
