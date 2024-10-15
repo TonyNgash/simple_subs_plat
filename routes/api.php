@@ -16,9 +16,17 @@ Route::get("/testa", function(Request $request){
     return json_encode("you");
 });
 
+//add new websites
 Route::post('/websites', [WebsiteController::class, 'store']);
+
+//add posts to a website
 Route::post('/websites/{website_id}/posts', [PostController::class, 'store']);
+
+//create new users
 Route::post('/subscribers',[SubscriberController::class, 'create']);
+
+//make a user subscribe to a website
 Route::post('/subscriber/{subscriber_id}/website/{website_id}',[SubscriberController::class, 'subscribe']);
 
-Route::post('/mail/',[MailController::class,'sendMail']);
+//mail testa
+// Route::post('/mail/',[MailController::class,'sendMail']);
